@@ -1,0 +1,69 @@
+/* ==========================================================================
+ *  Jellyfin Custom CSS Overrides
+ *  ========================================================================== */
+
+/* Item Details & Layout Tweaks */
+.itemDetailsGroup {
+    box-shadow: none !important;
+    background-color: transparent !important;
+}
+
+.layout-desktop #itemDetailPage .detailSection {
+    grid-template-columns: 1.3fr 1.7fr 1fr 1fr;
+}
+
+.layout-desktop #itemDetailPage .trackSelections {
+    grid-column: 1 / 3;
+    order: 2;
+}
+
+.layout-desktop #itemDetailPage .itemDetailsGroup {
+    grid-column: 3 / 5;
+    order: 3;
+}
+
+.detailsGroupItem {
+    justify-content: flex-start;
+    gap: 0.75em;
+}
+
+.detailsGroupItem > .label {
+    flex-basis: 5em;
+}
+
+.detailsGroupItem > .focuscontainer-x,
+.detailsGroupItem > .focuscontainer-x a {
+    text-align: start;
+}
+
+.trackSelections .selectContainer,
+.trackSelections .selectContainer select {
+    width: 100%;
+}
+
+/* Medium-Sized Cast Cards & Avatar Sizing */
+#castContent .card,
+#guestCastContent .card,
+#castCollapsible .card {
+width: 9em !important;
+}
+
+#castContent .cardScalable,
+#guestCastContent .cardScalable,
+#castCollapsible .cardScalable {
+width: 7.5em !important;
+height: 7.5em !important;
+margin: 0 auto !important;
+}
+
+#castContent .cardText,
+#guestCastContent .cardText,
+#castCollapsible .cardText {
+font-size: 0.88em !important;
+}
+
+#castContent .cardText-secondary,
+#guestCastContent .cardText-secondary,
+#castCollapsible .cardText-secondary {
+font-size: 0.8em !important;
+}
