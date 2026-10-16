@@ -156,7 +156,7 @@ font-size: 0.8em !important;
   /* Backdrop image */
   --my-backdrop-blur: 0px;        /* 0px = sharp */
   --my-backdrop-scale: 1;         /* use 1.1 if blur > 0 */
-  --my-backdrop-overlay: 0.05;    /* 0 = image fully visible, 1 = fully dark */
+  --my-backdrop-overlay: 0.75;    /* 0 = image fully visible, 1 = fully dark */
 
   /* Details page gradient: transparent at top, dark at bottom */
   --my-detail-start: 10vh;
@@ -165,7 +165,7 @@ font-size: 0.8em !important;
 
   /* Feathered buffer at the media bar's bottom edge */
   --my-feather-up: 16vh;           /* how far the fade reaches up INTO the bar (hides the hard edge) */
-  --my-feather-down: 50vh;        /* how far the fade extends below the bar */
+  --my-feather-down: 100vh;        /* how far the fade extends below the bar */
   --my-feather-peak: 1;           /* darkness at the bar's edge: 1 = fully dark */
   --my-buffer-offset: -190px;        /* move the whole fade up (negative) or down (positive) */
 
