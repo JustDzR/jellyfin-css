@@ -2,6 +2,20 @@
  *  Jellyfin Custom CSS Overrides
  *  ========================================================================== */
 
+/* Intro/Outro/Recap colors on Seekbar */
+.mdl-slider-background-flex {
+  position: relative;
+  overflow: hidden; /* keeps segment ends inside the rounded bar */
+}
+
+.seg-overlay {
+  position: absolute;
+  top: 0;
+  height: 100%;   /* follows the bar when ElegantFin enlarges it on drag */
+  pointer-events: none;
+  z-index: 5;
+}
+
 /* Item Details & Layout Tweaks */
 .itemDetailsGroup {
     box-shadow: none !important;
@@ -66,4 +80,191 @@ font-size: 0.88em !important;
 #guestCastContent .cardText-secondary,
 #castCollapsible .cardText-secondary {
 font-size: 0.8em !important;
+}
+
+/* ===== Track selections: no panel, gray select boxes ===== */
+:root {
+  --my-select-bg-rgb: 128,128,128;   /* neutral gray */
+  --my-select-bg-alpha: 0.1;         /* 30% */
+}
+
+.trackSelections {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.trackSelections .emby-select-withcolor,
+.trackSelections .detailTrackSelect {
+  background-color: rgba(var(--my-select-bg-rgb), var(--my-select-bg-alpha)) !important;
+}
+
+/* ===== 1. YOUR THEME TEMPLATE (swap or edit freely) ===== */
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    /* Text Colors */
+    --textColor: rgb(209, 213, 219);
+    --dimTextColor: rgb(156, 163, 175);
+
+    /* Gradient Points */
+    --darkerGradientPoint: hsla(0, 0%, 0%, 1);
+    --darkerGradientPointAlpha: hsla(0, 0%, 0%, 0.85);
+    --lighterGradientPoint: hsla(0, 0%, 7%, 1);
+    --lighterGradientPointAlpha: hsla(0, 0%, 7%, 0.85);
+
+    /* Accent Colors */
+    --accentColor: hsl(243, 75%, 62%);
+    --accentHoverColor: rgb(117, 111, 226);
+
+    /* Base Component Colors */
+    --btnSubmitColor: rgb(61, 54, 178);
+    --btnSubmitBorderColor: rgb(117, 111, 226);
+    --checkboxCheckedBgColor: rgb(79, 70, 229);
+    --highlightOutlineColor: rgb(37, 99, 235);
+
+    /* App Bar */
+    --headerColor: hsla(0, 0%, 7%, 0.8);
+    --headerColorGradient:
+        linear-gradient(
+            180deg,
+            hsla(0, 0%, 7%, 0.95) 30%,
+            55%,
+            transparent 90%
+        );
+
+    /* Drawer */
+    --drawerColor: hsla(0, 0%, 7%, 0.9);
+
+    /* Borders */
+    --borderColor: hsla(0, 0%, 32%, 1);
+    --darkerBorderColor: hsla(0, 0%, 22%, 1);
+    --lighterBorderColor: hsla(0, 0%, 100%, 0.2);
+
+    /* Selectors */
+    --selectorBackgroundColor: hsla(0, 0%, 27%, 1);
+    --selectorBackgroundColorAlpha: hsla(0, 0%, 27%, 0.5);
+
+    /* Buttons */
+    --btnMiniPlayColor: hsla(0, 0%, 0%, 0.8);
+    --btnMiniPlayBorderColor: hsla(0, 0%, 30%, 0.8);
+}
+
+/* ===== 2. EFFECT TWEAKS (these adapt to the template above) ===== */
+:root {
+  /* Backdrop image */
+  --my-backdrop-blur: 0px;        /* 0px = sharp */
+  --my-backdrop-scale: 1;         /* use 1.1 if blur > 0 */
+  --my-backdrop-overlay: 0.05;    /* 0 = image fully visible, 1 = fully dark */
+
+  /* Details page gradient: transparent at top, dark at bottom */
+  --my-detail-start: 10vh;
+  --my-detail-end: 55vh;
+  --my-detail-end-alpha: 0.75;
+
+  /* Feathered buffer at the media bar's bottom edge */
+  --my-feather-up: 16vh;           /* how far the fade reaches up INTO the bar (hides the hard edge) */
+  --my-feather-down: 50vh;        /* how far the fade extends below the bar */
+  --my-feather-peak: 1;           /* darkness at the bar's edge: 1 = fully dark */
+  --my-buffer-offset: -190px;        /* move the whole fade up (negative) or down (positive) */
+
+  /* Blur on header, drawer, dialogs, cards (0px disables) */
+  --my-ui-blur: 0px;
+}
+
+/* ===== WIRING (no need to edit below) ===== */
+:root {
+  --blurSmallest: blur(var(--my-ui-blur));
+  --blurDefault: blur(var(--my-ui-blur));
+  --blurLarge: blur(var(--my-ui-blur));
+  --blurLargest: blur(var(--my-ui-blur));
+}
+
+/* Backdrop image: blur and scale */
+.backdropImage:before {
+  filter: blur(var(--my-backdrop-blur)) !important;
+  transform: scale(var(--my-backdrop-scale)) !important;
+}
+
+/* Backdrop overlay, including home/library pages and mobile */
+.backgroundContainer.withBackdrop,
+.withSectionTabs .backgroundContainer.withBackdrop,
+.layout-mobile .backgroundContainer.withBackdrop,
+.layout-mobile .withSectionTabs .backgroundContainer.withBackdrop {
+  background: linear-gradient(
+    0deg,
+    var(--darkerGradientPoint),
+    45%,
+    color-mix(in srgb, var(--darkerGradientPoint) calc(var(--my-backdrop-overlay) * 100%), transparent)
+  );
+  opacity: 1;
+}
+
+/* Show the backdrop image on home/library pages
+   (delete these two lines if you don't want a home backdrop at all) */
+.layout-desktop .withSectionTabs .backdropImage:after { opacity: 1; }
+.layout-mobile .withSectionTabs .backdropImage:after { display: block; }
+
+/* Details page: transparent -> dark */
+.layout-desktop .detailPageWrapperContainer {
+  background: linear-gradient(
+    180deg,
+    transparent var(--my-detail-start),
+    color-mix(in srgb, var(--darkerGradientPoint) calc(var(--my-detail-end-alpha) * 100%), transparent) var(--my-detail-end)
+  );
+}
+.layout-mobile .detailPageWrapperContainer {
+  background: linear-gradient(
+    180deg,
+    transparent 0,
+    color-mix(in srgb, var(--darkerGradientPoint) calc(var(--my-detail-end-alpha) * 100%), transparent) 25vh
+  );
+}
+
+/* Feathered dark buffer centered on the media bar's bottom edge */
+#slides-container {
+  overflow: visible;
+}
+#slides-container::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% - var(--my-feather-up) + var(--my-buffer-offset));
+  height: calc(var(--my-feather-up) + var(--my-feather-down));
+  pointer-events: none;
+  z-index: 5;
+  --c: var(--darkerGradientPoint);
+  --p: calc(var(--my-feather-peak) * 100%);
+  background: linear-gradient(
+    180deg,
+    transparent 0,
+    color-mix(in srgb, var(--c) calc(var(--p) * 0.16), transparent) calc(var(--my-feather-up) * 0.25),
+    color-mix(in srgb, var(--c) calc(var(--p) * 0.50), transparent) calc(var(--my-feather-up) * 0.50),
+    color-mix(in srgb, var(--c) calc(var(--p) * 0.84), transparent) calc(var(--my-feather-up) * 0.75),
+    color-mix(in srgb, var(--c) var(--p), transparent) var(--my-feather-up),
+    color-mix(in srgb, var(--c) calc(var(--p) * 0.84), transparent) calc(var(--my-feather-up) + var(--my-feather-down) * 0.25),
+    color-mix(in srgb, var(--c) calc(var(--p) * 0.50), transparent) calc(var(--my-feather-up) + var(--my-feather-down) * 0.50),
+    color-mix(in srgb, var(--c) calc(var(--p) * 0.16), transparent) calc(var(--my-feather-up) + var(--my-feather-down) * 0.75),
+    transparent 100%
+  );
+}
+
+/* ===== Track selections: no panel, gray select boxes ===== */
+:root {
+  --my-select-bg-rgb: 128,128,128;   /* neutral gray */
+  --my-select-bg-alpha: 0.1;         /* 30% */
+}
+
+.trackSelections {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.trackSelections .emby-select-withcolor,
+.trackSelections .detailTrackSelect {
+  background-color: rgba(var(--my-select-bg-rgb), var(--my-select-bg-alpha)) !important;
 }
