@@ -156,7 +156,7 @@ font-size: 0.8em !important;
   /* Backdrop image */
   --my-backdrop-blur: 0px;        /* 0px = sharp */
   --my-backdrop-scale: 1;         /* use 1.1 if blur > 0 */
-  --my-backdrop-overlay: 0.3;    /* 0 = image fully visible, 1 = fully dark */
+  --my-backdrop-overlay: 0.4;    /* 0 = image fully visible, 1 = fully dark */
 
   /* Details page gradient: transparent at top, dark at bottom */
   --my-detail-start: 10vh;
