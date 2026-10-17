@@ -222,35 +222,6 @@ font-size: 0.8em !important;
   );
 }
 
-/* Feathered dark buffer centered on the media bar's bottom edge */
-#slides-container {
-  overflow: visible;
-}
-#slides-container::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(100% - var(--my-feather-up) + var(--my-buffer-offset));
-  height: calc(var(--my-feather-up) + var(--my-feather-down));
-  pointer-events: none;
-  z-index: 5;
-  --c: var(--darkerGradientPoint);
-  --p: calc(var(--my-feather-peak) * 100%);
-  background: linear-gradient(
-    180deg,
-    transparent 0,
-    color-mix(in srgb, var(--c) calc(var(--p) * 0.16), transparent) calc(var(--my-feather-up) * 0.25),
-    color-mix(in srgb, var(--c) calc(var(--p) * 0.50), transparent) calc(var(--my-feather-up) * 0.50),
-    color-mix(in srgb, var(--c) calc(var(--p) * 0.84), transparent) calc(var(--my-feather-up) * 0.75),
-    color-mix(in srgb, var(--c) var(--p), transparent) var(--my-feather-up),
-    color-mix(in srgb, var(--c) calc(var(--p) * 0.84), transparent) calc(var(--my-feather-up) + var(--my-feather-down) * 0.25),
-    color-mix(in srgb, var(--c) calc(var(--p) * 0.50), transparent) calc(var(--my-feather-up) + var(--my-feather-down) * 0.50),
-    color-mix(in srgb, var(--c) calc(var(--p) * 0.16), transparent) calc(var(--my-feather-up) + var(--my-feather-down) * 0.75),
-    transparent 100%
-  );
-}
-
 /* ===== Track selections: no panel, gray select boxes ===== */
 :root {
   --my-select-bg-rgb: 128,128,128;   /* neutral gray */
